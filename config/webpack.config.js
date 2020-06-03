@@ -3,7 +3,7 @@
  * @作者: Anton
  * @Date: 2020-03-02 14:49:41
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-03 13:55:39
+ * @LastEditTime: 2020-06-03 15:16:07
  */ 
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -77,7 +77,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
 			// filename: path.join(__dirname, 'entry.html'), // 生成的html(绝对路径：可用于生成到根目录)
-            filename: 'index.html', // 生成的html文件名（相对路径：将生成到output.path指定的dist目录下）
+            filename: 'pages/index.html', // 生成的html文件名（相对路径：将生成到output.path指定的dist目录下）
             template: path.join(__dirname, '../src/index.html'), // 以哪个文件作为模板，不指定的话用默认的空模板
             minify: {
                 removeComments: true // 删除注释
@@ -85,7 +85,7 @@ module.exports = {
             hash: true // 加hash
         }),
         ...Object.keys(entries).map(entry => new HtmlWebpackPlugin({
-            filename: `${entry}.html`, 
+            filename: `pages/${entry}.html`, 
             chunks: [entry]
         })),
         // new HtmlWebpackPlugin({
