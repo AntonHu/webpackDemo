@@ -3,7 +3,7 @@
  * @作者: Anton
  * @Date: 2020-03-02 14:49:41
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-03 15:16:07
+ * @LastEditTime: 2020-06-03 15:43:33
  */ 
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -33,6 +33,7 @@ module.exports = {
             const { name } = glob.chunk;
             return `scripts/${name}/${name}.[hash].js`;
         },
+        publicPath: '../',
         // chunkFilename: 'script/[name]/[name].[hash].js',
     },
     devtool: 'inline-source-map',
@@ -99,8 +100,8 @@ module.exports = {
         extractLESS
     ],
     devServer: {
-        // index: 'menu.html', // 配置该项，localhost将不再默认指向index.html，访问入口文件需手动补全
-        contentBase: '/', // 指定静态服务器的根目录，可以访问到 不通过webpack处理 的文件
+        index: 'pages/index.html', // 配置该项，localhost将不再默认指向index.html，访问入口文件需手动补全
+        contentBase: 'dist', // 指定静态服务器的根目录，可以访问到 不通过webpack处理 的文件
         publicPath: '/', // 告诉浏览器通过什么路径去访问上面的 webpack打包目录
         host: 'localhost',
         port: 10010
