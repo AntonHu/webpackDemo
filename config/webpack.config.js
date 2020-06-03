@@ -1,24 +1,39 @@
+/*
+ * @文件描述: 
+ * @作者: Anton
+ * @Date: 2020-03-02 14:49:41
+ * @LastEditors: Anton
+ * @LastEditTime: 2020-06-03 13:55:39
+ */ 
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const { getMultiEntries } = require('./config.utils');
 
 const extractLESS = new ExtractTextPlugin({
 	// disable: process.env.NODE_ENV == 'development' ? true : false, // 开发环境下直接内联，不抽离
-    filename: 'style/[name].[hash].css',
+    filename: 'styles/[name].[hash].css',
     // allChunks: true // 异步文件抽离样式，设置为true
 });
 
+var entries = getMultiEntries(path.resolve('src/pages/*'));
+
 module.exports = {
     mode: 'development',
-    entry: {
-        // 入口文件，传入对象，定义不同的chunk（如app, utils）
-        app: path.join(__dirname, '../src/script/index'),
-        utils: path.join(__dirname, '../src/script/utils')
-    },
+    entry: entries,
+    // {
+    //     // 入口文件，传入对象，定义不同的chunk（如app, utils）
+    //     app: path.join(__dirname, '../src/script/index'),
+    //     utils: path.join(__dirname, '../src/script/utils')
+    // },
     output: {
-        filename: '[name].[hash].js',
         path: path.join(__dirname, '../dist'),
+        filename: (glob) => {
+            const { name } = glob.chunk;
+            return `scripts/${name}/${name}.[hash].js`;
+        },
+        // chunkFilename: 'script/[name]/[name].[hash].js',
     },
     devtool: 'inline-source-map',
     module: {
@@ -36,7 +51,7 @@ module.exports = {
                 //     { loader: 'less-loader' } // less 转译 css
                 // ],
                 use: extractLESS.extract({
-                    filename: '[name].[hash].css',
+                    // filename: '[name].[hash].css',
                     fallback: 'style-loader',
                     use: ['css-loader', 'less-loader'],
                     publicPath: '../' // 默认取output.publicPath
@@ -69,18 +84,22 @@ module.exports = {
             },
             hash: true // 加hash
         }),
-        new HtmlWebpackPlugin({
-            filename: 'app.html', 
-            chunks: ['app']
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'utils.html', 
-            chunks: ['utils']
-        }),
+        ...Object.keys(entries).map(entry => new HtmlWebpackPlugin({
+            filename: `${entry}.html`, 
+            chunks: [entry]
+        })),
+        // new HtmlWebpackPlugin({
+        //     filename: 'app.html', 
+        //     chunks: ['app']
+        // }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'utils.html', 
+        //     chunks: ['utils']
+        // }),
         extractLESS
     ],
     devServer: {
-        index: 'menu.html', // 配置该项，localhost将不再默认指向index.html，访问入口文件需手动补全
+        // index: 'menu.html', // 配置该项，localhost将不再默认指向index.html，访问入口文件需手动补全
         contentBase: '/', // 指定静态服务器的根目录，可以访问到 不通过webpack处理 的文件
         publicPath: '/', // 告诉浏览器通过什么路径去访问上面的 webpack打包目录
         host: 'localhost',
