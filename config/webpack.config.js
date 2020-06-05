@@ -3,7 +3,7 @@
  * @作者: Anton
  * @Date: 2020-03-02 14:49:41
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-03 15:43:33
+ * @LastEditTime: 2020-06-05 14:56:01
  */ 
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -17,7 +17,7 @@ const extractLESS = new ExtractTextPlugin({
     // allChunks: true // 异步文件抽离样式，设置为true
 });
 
-var entries = getMultiEntries(path.resolve('src/pages/*'));
+var entries = getMultiEntries(path.resolve('src/pages/*/*.+(jsx|js|tsx|ts)'));
 
 module.exports = {
     mode: 'development',
@@ -31,10 +31,10 @@ module.exports = {
         path: path.join(__dirname, '../dist'),
         filename: (glob) => {
             const { name } = glob.chunk;
-            return `scripts/${name}/${name}.[hash].js`;
+            return `scripts/${name}.[hash].js`;
         },
-        publicPath: '../',
-        // chunkFilename: 'script/[name]/[name].[hash].js',
+        publicPath: '../../',
+        chunkFilename: 'script/[name].[contenthash].js',
     },
     devtool: 'inline-source-map',
     module: {
@@ -55,7 +55,7 @@ module.exports = {
                     // filename: '[name].[hash].css',
                     fallback: 'style-loader',
                     use: ['css-loader', 'less-loader'],
-                    publicPath: '../' // 默认取output.publicPath
+                    publicPath: '../../' // 默认取output.publicPath
                 })
             },
             {
@@ -101,7 +101,8 @@ module.exports = {
     ],
     devServer: {
         index: 'pages/index.html', // 配置该项，localhost将不再默认指向index.html，访问入口文件需手动补全
-        contentBase: 'dist', // 指定静态服务器的根目录，可以访问到 不通过webpack处理 的文件
+        compress: true,
+        // contentBase: 'dist', // 指定静态服务器的根目录，可以访问到 不通过webpack处理 的文件
         publicPath: '/', // 告诉浏览器通过什么路径去访问上面的 webpack打包目录
         host: 'localhost',
         port: 10010

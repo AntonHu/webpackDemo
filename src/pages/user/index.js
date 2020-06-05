@@ -3,8 +3,8 @@
  * @作者: Anton
  * @Date: 2020-06-03 10:37:52
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-03 11:08:38
+ * @LastEditTime: 2020-06-05 11:24:43
  */ 
-import '../../styles/user/index.less';
+import './index.less';
 
 console.log('page user');

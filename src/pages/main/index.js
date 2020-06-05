@@ -5,6 +5,6 @@
  * @LastEditors: Anton
  * @LastEditTime: 2020-06-03 11:08:26
  */ 
-import '../../styles/main/index.less';
+import './index.less';
 
 console.log('page main');

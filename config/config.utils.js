@@ -3,16 +3,18 @@
  * @作者: Anton
  * @Date: 2020-06-03 10:21:41
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-03 11:12:00
+ * @LastEditTime: 2020-06-05 11:28:35
  */ 
 const path = require('path');
 const glob = require('glob');
 
 exports.getMultiEntries = globPath => {
-    let entries = {}, basename;
+    let entries = {};
     glob.sync(globPath).forEach(entry => {
-        basename = path.basename(entry, path.extname(entry));
-        entries[basename] = entry + '/index.js';
+        const basename = path.basename(entry, path.extname(entry)); // 返回路径最后一部分名称，去掉后缀名
+        let dirname = path.basename(path.dirname(entry)); // 返回路径最后一个文件夹名称
+        dirname = dirname + '/' + basename;
+        entries[dirname] = entry;
     });
     return entries;
 };
