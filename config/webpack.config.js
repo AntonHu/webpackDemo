@@ -3,7 +3,7 @@
  * @作者: Anton
  * @Date: 2020-03-02 14:49:41
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-05 14:56:01
+ * @LastEditTime: 2020-06-17 16:30:17
  */ 
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -37,8 +37,24 @@ module.exports = {
         chunkFilename: 'script/[name].[contenthash].js',
     },
     devtool: 'inline-source-map',
+    // 解析扩展，添加了这个东西。我们就可以直接 import { a } from 'index'; 了，而不用必须 import { a } from 'index.ts' 这样输入了，因为 webpack 会自动帮我们搜索查询并添加
+    resolve: {
+        extensions: ['.tsx', '.ts', '.jsx', '.js'],
+    },
     module: {
         rules: [
+            {
+                test: /\.(js)x?$/,
+                exclude: /node_modules/,
+                use: 'babel-loader'
+            },
+            {
+                test: /\.(ts)x?$/,
+                exclude: /node_modules/,
+                use: [
+                    'babel-loader', 'ts-loader'
+                ]
+            },
             {
                 test: /\.css$/,
                 // 从右到左，loader安装后无需引入可直接使用
@@ -86,6 +102,7 @@ module.exports = {
             hash: true // 加hash
         }),
         ...Object.keys(entries).map(entry => new HtmlWebpackPlugin({
+            template: path.join(__dirname, '../src/index.html'), // 以哪个文件作为模板，不指定的话用默认的空模板
             filename: `pages/${entry}.html`, 
             chunks: [entry]
         })),
