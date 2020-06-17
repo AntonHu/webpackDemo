@@ -3,7 +3,7 @@
  * @作者: Anton
  * @Date: 2020-04-24 21:07:08
  * @LastEditors: Anton
- * @LastEditTime: 2020-05-22 16:53:46
+ * @LastEditTime: 2020-06-17 17:34:14
  */
 module.exports = {
     env: {
@@ -46,6 +46,7 @@ module.exports = {
         '@typescript-eslint/no-explicit-any': 'off', // 允许any 太难了
         '@typescript-eslint/no-this-alias': 'off',
         '@typescript-eslint/no-empty-function': 'off', // 允许空函数
+        '@typescript-eslint/no-var-requires': 'off',
         semi: [1, 'always'], // 句末需要分号
         // indent: [1, 4], // 缩进4个空格
         // "quotes": [1, "single"], // 请使用单引号
