@@ -8,7 +8,25 @@
     "dev": "webpack --config config/webpack.config.js --mode development",
     "prod": "webpack --config config/webpack.config.js --mode production",
     "start": "webpack-dev-server  --config config/webpack.config.js --mode development  --open",
-    "watch": "webpack --config config/webpack.config.js --mode development --watch"
+    "watch": "webpack --config config/webpack.config.js --mode development --watch",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less}'",
+    "prettierSingle": "prettier --write"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{css,less}": [
+      "prettier --write"
+    ],
+    "*.{js?(x)}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "eslint --fix",
+      "prettier --parser=typescript --write"
+    ]
   },
   "author": "",
   "license": "ISC",
