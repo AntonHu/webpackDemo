@@ -3,7 +3,7 @@
  * @作者: Anton
  * @Date: 2020-03-02 14:49:41
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-18 19:28:01
+ * @LastEditTime: 2020-06-18 19:40:08
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -18,11 +18,6 @@ const chalk = require('chalk');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const { getMultiEntries, getMultiUtils } = require('./config.utils');
 
-const extractLESS = new ExtractTextPlugin({
-    // disable: process.env.NODE_ENV == 'development' ? true : false, // 开发环境下直接内联，不抽离
-    filename: 'styles/[name].[hash].css'
-    // allChunks: true // 异步文件抽离样式，设置为true
-});
 const extractSass = new ExtractTextPlugin({
     // disable: process.env.NODE_ENV == 'development' ? true : false, // 开发环境下直接内联，不抽离
     filename: 'styles/[name].[hash].css'
@@ -98,20 +93,6 @@ module.exports = {
                             }
                         }
                     ],
-                    publicPath: '../../' // 默认取output.publicPath
-                })
-            },
-            {
-                test: /\.less$/,
-                // use: [
-                //     { loader: 'style-loader' }, // css 内联
-                //     { loader: 'css-loader' }, // 解析 @import url() 语法
-                //     { loader: 'less-loader' } // less 转译 css
-                // ],
-                use: extractLESS.extract({
-                    // filename: '[name].[hash].css',
-                    fallback: 'style-loader',
-                    use: ['css-loader', 'postcss-loader', 'less-loader'],
                     publicPath: '../../' // 默认取output.publicPath
                 })
             },
