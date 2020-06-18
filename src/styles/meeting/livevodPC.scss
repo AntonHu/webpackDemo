@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+$baseWidth: 1920; // 设计稿宽度
+
+@function func-pxToVW($px, $vw: $baseWidth) {
+    @if ($vw != $baseWidth) {
+        @return $vw * $px / $baseWidth + px;
+    } @else {
+        @return $px / $vw * 100 + vw;
+    }
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}
+#page-meeting-livevod {
+    height: 100%;
+    .container {
+        height: 100%;
+        .main-livevod-box {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .message-modal {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            bottom: 30px;
+            right: 0;
+            width: func-pxToVW(483, $baseWidth);
+            height: func-pxToVW(230, $baseWidth);
+
+            .message-modal-close-img {
+                position: absolute;
+                left: func-pxToVW(-30, $baseWidth);
+                width: func-pxToVW(30, $baseWidth);
+                height: func-pxToVW(172, $baseWidth);
+            }
+            .message-modal-main-img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}

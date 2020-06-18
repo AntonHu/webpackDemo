@@ -1,0 +1,103 @@
+/*
+ * @文件描述: 邀请函生成样式
+ * @作者: Anton
+ * @Date: 2020-06-02 11:42:53
+ * @LastEditors: Anton
+ * @LastEditTime: 2020-06-04 21:05:33
+ */
+// 697 418
+@function func-pxToVW($px) {
+    @return $px / 375 * 100 + vw;
+}
+html,
+body {
+    height: 100%;
+}
+#app {
+    height: 100%;
+}
+#page-actInvitationImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    .release-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+
+        .page-image {
+            position: relative;
+            .html-bg {
+                width: 100%;
+                height: 100%;
+            }
+            .operation {
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                .name-text {
+                    border: none;
+                    background-color: transparent;
+                    color: #f4f4f4;
+                    font-family: '微软雅黑';
+                    text-align: center;
+                    letter-spacing: 5px;
+                    white-space: nowrap;
+                }
+                .down-btn {
+                    width: func-pxToVW(200);
+                    height: func-pxToVW(44);
+                    border-radius: func-pxToVW(8);
+                    background-color: rgba(253, 217, 3, 1);
+
+                    color: rgba(0, 0, 0, 0.85);
+                    font-size: func-pxToVW(17);
+                    text-align: center;
+                    font-family: PingFangSC-Regular;
+                    cursor: pointer;
+                    z-index: 9;
+                }
+            }
+        }
+    }
+    .bottom {
+        color: rgba(0, 0, 0, 0.85);
+        font-size: func-pxToVW(16);
+        text-align: center;
+        font-family: PingFangSC-Regular;
+    }
+}
+
+.loadingContent {
+    width: 100vw;
+    height: 100%;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 998;
+}
+.loadingContent .content {
+    width: 100px;
+    height: 100px;
+    padding: 20px;
+    background: #353535;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -50px 0 0 -50px;
+    opacity: 0.95;
+}
+.loadingContent .content > img {
+    width: 60px;
+}

@@ -1,0 +1,188 @@
+@charset "UTF-8";
+
+$baseWidth: 375; // 设计稿宽度
+
+@function func-pxToVW($px, $vw: $baseWidth) {
+    @if ($vw != $baseWidth) {
+        @return $vw * $px / $baseWidth + px;
+    } @else {
+        @return $px / $vw * 100 + vw;
+    }
+}
+
+html,
+body,
+#app {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}
+.weui_toast {
+    padding: 0;
+    border-radius: 15px;
+    height: auto;
+    min-height: auto;
+}
+.navigation-modal {
+    z-index: 999;
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    img {
+        position: absolute;
+    }
+}
+#wx-navigation {
+    @extend .navigation-modal;
+    // display: block;
+    img {
+        top: func-pxToVW(7);
+        right: func-pxToVW(20);
+        width: func-pxToVW(156);
+    }
+}
+#liulanqi-navigation {
+    @extend .navigation-modal;
+    // display: block;
+    img {
+        bottom: func-pxToVW(51);
+        left: func-pxToVW(22);
+        width: func-pxToVW(189);
+    }
+}
+#download-navigation {
+    @extend .navigation-modal;
+    // display: block;
+    img {
+        top: func-pxToVW(7);
+        right: func-pxToVW(20);
+        width: func-pxToVW(181);
+    }
+}
+
+@mixin styling($vwWidth: $baseWidth) {
+    #page-meeting-video {
+        margin: 0 auto;
+        max-width: func-pxToVW($baseWidth, 816);
+        height: 100%;
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+    }
+    .main-video-box {
+        width: 100%;
+    }
+    /*隐藏滚动条*/
+    .detail-box::-webkit-scrollbar {
+        display: none;
+    }
+    .detail-box::-webkit-scrollbar {
+        width: 0px;
+    }
+    .detail-box {
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 auto;
+        padding: 26px 16px;
+        width: func-pxToVW($baseWidth, $vwWidth);
+
+        .detail-box-introduction {
+            // padding-bottom: func-pxToVW(27, $vwWidth);
+
+            .introduction-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .introduction-title {
+                    color: rgba(255, 255, 255, 1);
+                    font-size: 18px;
+                    text-align: left;
+                    font-family: PingFangSC-Semibold;
+                }
+                .introduction-btn-group {
+                    display: flex;
+
+                    .share-btn {
+                        width: func-pxToVW(24, $vwWidth);
+                        height: func-pxToVW(24, $vwWidth);
+                    }
+                    .download-btn {
+                        margin-left: func-pxToVW(25, $vwWidth);
+                        width: func-pxToVW(24, $vwWidth);
+                        height: func-pxToVW(24, $vwWidth);
+                    }
+                }
+            }
+            .introduction-content {
+                margin-top: func-pxToVW(11, $vwWidth);
+                color: rgba(153, 153, 153, 1);
+                font-size: 13px;
+                font-family: PingFangSC-Semibold;
+            }
+        }
+
+        .detail-box-video-list {
+            margin-top: func-pxToVW(27, $vwWidth);
+            padding-top: func-pxToVW(12, $vwWidth);
+            border-top: solid 1px #5f4a27;
+
+            .video-list-title {
+                color: rgba(255, 255, 255, 1);
+                font-size: 13px;
+                text-align: left;
+                font-family: PingFangSC-Semibold;
+            }
+            .video-list-container {
+                .video-item {
+                    display: flex;
+                    align-items: center;
+                    margin-top: func-pxToVW(18, $vwWidth);
+
+                    .video-image {
+                        width: func-pxToVW(138, $vwWidth);
+                        height: func-pxToVW(69, $vwWidth);
+                        img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    .video-content {
+                        flex: 1;
+                        margin-left: func-pxToVW(13, $vwWidth);
+                        width: func-pxToVW(191, $vwWidth);
+
+                        .video-title {
+                            color: rgba(255, 255, 255, 1);
+                            font-size: 14px;
+                            text-align: left;
+                            font-family: PingFangSC-Regular;
+                        }
+                        .video-description {
+                            margin-top: func-pxToVW(4, $vwWidth);
+                            color: rgba(153, 153, 153, 1);
+                            font-size: 12px;
+                            text-align: justify;
+                            font-family: PingFangSC-Regular;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 屏幕宽度大于388px，用 388px 作为 最大宽度 计算尺寸
+@include styling(388);
+@media only screen and (max-width: 388px) {
+    // 屏幕宽度小于388px，用默认值 375px 作为 100vw 计算尺寸
+    @include styling();
+}

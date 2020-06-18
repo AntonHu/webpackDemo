@@ -1,0 +1,176 @@
+@charset "UTF-8";
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+    background: #030304;
+    min-height: 100vh;
+}
+
+.main-wrapper {
+    width: 100%;
+    padding: 0px 30px;
+    position: absolute;
+    top: calc(100vw * 450 / 375);
+    left: 0px;
+    background: #030304;
+}
+
+.login-wrapper .phone-box {
+    width: 100%;
+    border: 1px solid #d3d3d3;
+    border-radius: 4px;
+    padding: 0px 15px;
+    margin-bottom: 15px;
+    background: #fff;
+}
+
+.login-wrapper .phone-box .phone-input {
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    line-height: 42px;
+    outline: none;
+}
+
+.login-wrapper .btn,
+.info-wrapper .btn {
+    width: 100%;
+    font-size: 16px;
+    line-height: 44px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    background: url(https://source.1kmxc.com/static-web-new/wechat/images/active/meeting/main_btn.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 30px;
+}
+
+.info-wrapper .info-box {
+    background: #fff;
+    padding: 0px 6%;
+    border-radius: 4px;
+    border: 1px solid #d3d3d3;
+    text-align: center;
+}
+.info-box .title {
+    font-family: PingFangSC-Medium;
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 15px;
+    padding: 15px 20px;
+}
+.info-box .subtitle {
+    font-family: PingFangSC-Regular;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.7);
+    padding: 13px 0px;
+    border-bottom: 1px solid #d3d3d3;
+}
+.info-box .subtitle:last-child {
+    border-bottom: none;
+}
+.info-box .address {
+    color: #e5c083;
+    text-decoration: underline;
+}
+.info-box .nav_img {
+    font-size: 17px;
+    margin-left: 10px;
+    color: #000;
+}
+
+.schedule-wrapper {
+    color: #fff;
+    text-align: center;
+    line-height: 24px;
+    padding: 35px 0px 45px;
+}
+.schedule-wrapper .title {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    padding-bottom: 10px;
+}
+.schedule-wrapper .schedule-content {
+    margin: 0 auto;
+    width: fit-content;
+}
+.schedule-wrapper .subtitle {
+    display: flex;
+    font-family: PingFangSC-Light;
+    font-size: 13px;
+}
+.schedule-wrapper .subtitle .subtitle-label {
+    display: flex;
+    justify-content: space-between;
+    width: 70px;
+}
+.schedule-wrapper .subtitle .subtitle-value {
+}
+.schedule-wrapper .tip {
+    font-family: PingFangSC-Light;
+    font-size: 13px;
+    padding-top: 20px;
+    color: #999999;
+}
+.schedule-wrapper .line {
+    padding-left: 5px;
+    text-decoration: underline;
+    color: #fff;
+}
+
+.dialog-modal {
+    display: none;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+}
+.dialog-modal .dialog-wrapper {
+    position: absolute;
+    background: #fff;
+    border-radius: 10px;
+    width: 76%;
+    margin: calc(50% - 20px) 12%;
+}
+
+.dialog-wrapper > img {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    margin-left: calc(50% - 25px);
+    margin-top: -18px;
+}
+.dialog-wrapper .title {
+    font-family: PingFangSC-Medium;
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 16px;
+    text-align: center;
+    padding: 40px 15px 6px;
+}
+.dialog-wrapper .subtitle {
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 13px;
+    padding: 6px 15px 15px;
+    text-align: justify;
+}
+.dialog-wrapper .btn {
+    line-height: 44px;
+    margin: 0px 15px;
+    border-top: 1px solid #d3d3d3;
+    text-align: center;
+    color: #222222;
+    font-family: PingFangSC-Regular;
+}
+.resultNormal {
+    position: absolute;
+    bottom: 0px;
+}
+.resultNormal-wrapper {
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    background: #fff;
+}

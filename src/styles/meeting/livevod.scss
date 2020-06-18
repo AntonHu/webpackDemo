@@ -1,0 +1,396 @@
+@charset "UTF-8";
+
+$baseWidth: 375; // 设计稿宽度
+
+@function func-pxToVW($px, $vw: $baseWidth) {
+    @if ($vw != $baseWidth) {
+        @return $vw * $px / $baseWidth + px;
+    } @else {
+        @return $px / $vw * 100 + vw;
+    }
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    background-color: #f6f9fa;
+}
+.weui_toast {
+    padding: 0;
+    border-radius: 15px;
+    height: auto;
+    min-height: auto;
+}
+.navigation-modal {
+    z-index: 999;
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    img {
+        position: absolute;
+    }
+}
+#wx-navigation {
+    @extend .navigation-modal;
+    // display: block;
+    img {
+        top: func-pxToVW(7);
+        right: func-pxToVW(20);
+        width: func-pxToVW(156);
+    }
+}
+#liulanqi-navigation {
+    @extend .navigation-modal;
+    // display: block;
+    img {
+        bottom: func-pxToVW(51);
+        left: func-pxToVW(22);
+        width: func-pxToVW(189);
+    }
+}
+#download-navigation {
+    @extend .navigation-modal;
+    // display: block;
+    img {
+        top: func-pxToVW(7);
+        right: func-pxToVW(20);
+        width: func-pxToVW(181);
+    }
+}
+
+.order-wrapper {
+    padding: 10px;
+    position: fixed;
+    bottom: 60px;
+    left: 15px;
+    right: 15px;
+    border-radius: 10px;
+    background: #4c4644;
+    background: -o-linear-gradient(top, #4c4644, #1e1e1e);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+}
+
+.order-content {
+    display: inline-block;
+    padding-left: 10px;
+    width: 100%;
+}
+
+.order-name {
+    color: #dedede;
+    font-size: 13px;
+    padding: 3px 0px;
+    width: calc(100% - 112px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.order-tip {
+    display: inline-block;
+    font-size: 17px;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0px;
+}
+
+.order-canvas {
+    font-size: 10px;
+    text-align: center;
+    position: absolute;
+    right: -20px;
+    top: 10px;
+}
+
+#canvas {
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+#myCanvas {
+    background-size: 45%;
+    width: 120px;
+}
+
+#canvas .title {
+    position: absolute;
+    top: calc(50% - 15px);
+    left: calc(50% - 15px);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #dedede;
+    font-size: 13px;
+}
+
+@mixin styling($maxWidth: $baseWidth, $vwWidth: $baseWidth) {
+    #page-meeting-livevod {
+        margin: 0 auto;
+        max-width: func-pxToVW($baseWidth, 816);
+        height: 100%;
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+    }
+    .main-livevod-box {
+        width: 100%;
+        height: func-pxToVW(212, $vwWidth);
+        border: none;
+    }
+    .detail-box {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+        width: 100%;
+        height: calc(100% - #{func-pxToVW(212, $vwWidth)});
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+
+        .title-live-container {
+            width: 100%;
+            background: #fff;
+            color: #333;
+            font-size: 14px;
+            font-family: PingFangSC-Regular;
+
+            .title-content {
+                padding: func-pxToVW(18, $maxWidth) func-pxToVW(16, $maxWidth);
+                border-bottom: 1px solid #dedede;
+
+                .left-content {
+                    display: inline-block;
+
+                    .title {
+                        font-size: 18px;
+                        font-family: PingFangSC-Semibold;
+                    }
+                    .subtitle {
+                        padding-top: 2px;
+                    }
+                }
+
+                .share-btn {
+                    float: right;
+                    text-align: center;
+                    color: #999;
+                    font-size: 12px;
+                    padding-right: func-pxToVW(10, $maxWidth);
+
+                    .iconfont {
+                        color: #000;
+                        font-size: 20px;
+                        padding-bottom: func-pxToVW(5, $maxWidth);
+                    }
+                }
+            }
+
+            .image-live-container {
+                padding-left: func-pxToVW(16, $maxWidth);
+                width: func-pxToVW($baseWidth, $maxWidth);
+                height: func-pxToVW(50, $maxWidth);
+                line-height: func-pxToVW(50, $maxWidth);
+                border-bottom: 1px solid #dedede;
+
+                .iconfont {
+                    font-size: 18px;
+                    margin-right: func-pxToVW(18, $maxWidth);
+                }
+            }
+        }
+
+        /*隐藏滚动条*/
+        .detail-box-message-list::-webkit-scrollbar {
+            display: none;
+        }
+        .detail-box-message-list::-webkit-scrollbar {
+            width: 0px;
+        }
+        .detail-box-message-list {
+            position: relative;
+            height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-top: func-pxToVW(12, $maxWidth);
+            width: func-pxToVW($baseWidth, $maxWidth);
+
+            .empty-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+
+                .empty-image {
+                    width: 180px;
+                }
+                .empty-text {
+                    margin-top: 15px;
+                    font-size: 14px;
+                    text-align: center;
+                    color: #909191;
+                }
+            }
+
+            .message-list-container {
+                padding: 0 14px func-pxToVW(12, $maxWidth) 16px;
+                .message-content {
+                    padding-top: func-pxToVW(16, $maxWidth);
+
+                    .message-time {
+                        text-align: center;
+                        color: #999;
+                        font-size: 14px;
+                    }
+
+                    .message-item:not(:first-child) {
+                        margin-top: func-pxToVW(7, $maxWidth);
+                    }
+                    .message-item {
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        border-radius: 5px;
+                        width: 100%;
+                        color: #fff;
+                        background-color: #fff;
+                        border: 1px solid #dedede;
+
+                        .message-item-video {
+                            display: flex;
+                            align-items: center;
+                            .message-item-video-left {
+                                .message-item-video-image {
+                                    width: func-pxToVW(138, $maxWidth);
+                                }
+                            }
+                            .message-item-video-right {
+                                flex: 1;
+                                margin-left: func-pxToVW(13, $maxWidth);
+                                .message-item-video-text {
+                                    margin-top: func-pxToVW(9, $maxWidth);
+                                    font-size: func-pxToVW(14.62, $maxWidth);
+                                    color: #333;
+                                }
+                                .message-item-video-btn {
+                                    margin-top: func-pxToVW(8, $maxWidth);
+                                    color: #333;
+                                    font-size: 14px;
+                                    font-family: PingFangSC-Regular;
+                                }
+                            }
+                        }
+                        .message-item-mix {
+                            padding: func-pxToVW(15, $maxWidth);
+                            .message-item-mix-image {
+                                width: func-pxToVW(224, $maxWidth);
+                            }
+                            .message-item-mix-text {
+                                margin-top: func-pxToVW(10, $maxWidth);
+                                font-size: func-pxToVW(14.62, $maxWidth);
+                                color: #333;
+                            }
+                        }
+                        .message-item-image {
+                            .message-item-mix-image {
+                                width: 100%;
+                            }
+                        }
+                        .message-item-text {
+                            padding: func-pxToVW(15, $maxWidth);
+                            .message-item-mix-text {
+                                font-size: func-pxToVW(14.62, $maxWidth);
+                                color: #333;
+                            }
+                        }
+                    }
+                }
+            }
+            .message-list-container-copy {
+                position: absolute;
+                top: 0;
+                padding: 0 16px func-pxToVW(12, $maxWidth) 16px;
+
+                .message-item:not(:first-child) {
+                    margin-top: func-pxToVW(12, $maxWidth);
+                }
+                .message-item {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    border-radius: 7px;
+                    padding: func-pxToVW(7, $maxWidth) func-pxToVW(26, $maxWidth);
+                    width: 100%;
+                    color: #fff;
+                    background-color: rgba(47, 52, 55, 0.9);
+
+                    // .message-item-blur {
+                    //   position: absolute;
+                    //   top: 0;
+                    //   left: 0;
+                    //   width: 100%;
+                    //   height: 100%;
+                    //   background-color: rgba(47, 52, 55, 0.7);
+                    //   filter: blur(10px);
+                    // }
+
+                    .message-item-video {
+                        z-index: 1;
+                        .message-item-mix-image {
+                            width: func-pxToVW(224, $maxWidth);
+                        }
+                        .message-item-mix-text {
+                            margin-top: func-pxToVW(9, $maxWidth);
+                            font-size: func-pxToVW(14.62, $maxWidth);
+                            color: #999;
+                        }
+                    }
+                    .message-item-mix {
+                        z-index: 1;
+                        .message-item-mix-image {
+                            width: func-pxToVW(224, $maxWidth);
+                        }
+                        .message-item-mix-text {
+                            margin-top: func-pxToVW(9, $maxWidth);
+                            font-size: func-pxToVW(14.62, $maxWidth);
+                            color: #999;
+                        }
+                    }
+                    .message-item-image {
+                        z-index: 1;
+                        .message-item-mix-image {
+                            width: 100%;
+                        }
+                    }
+                    .message-item-text {
+                        z-index: 1;
+                        .message-item-mix-text {
+                            margin-top: func-pxToVW(9, $maxWidth);
+                            font-size: func-pxToVW(14.62, $maxWidth);
+                            color: #999;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 屏幕宽度大于388px，用 388px 作为 最大宽度 计算尺寸
+@include styling(388, 816);
+@media only screen and (max-width: 816px) {
+    // 屏幕宽度小于388px，用默认值 375px 作为 100vw 计算尺寸
+    @include styling(388);
+}
+@media only screen and (max-width: 388px) {
+    // 屏幕宽度小于388px，用默认值 375px 作为 100vw 计算尺寸
+    @include styling();
+}
