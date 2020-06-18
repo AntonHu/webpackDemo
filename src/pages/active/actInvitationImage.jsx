@@ -3,9 +3,9 @@
  * @作者: Anton
  * @Date: 2020-06-02 11:42:41
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-18 19:30:07
+ * @LastEditTime: 2020-06-18 19:44:48
  */
-import '@/pages/active/actInvitationImage.scss';
+import '@/styles/active/actInvitationImage.scss';
 $(function () {
     FastClick.attach(document.body);
 });

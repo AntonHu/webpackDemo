@@ -5,7 +5,7 @@
  * @LastEditors: Anton
  * @LastEditTime: 2020-06-18 19:28:32
  */
-import '@/pages/active/actReleaseInvitation.scss';
+import '@/styles/active/actReleaseInvitation.scss';
 // $(function () {
 //     FastClick.attach(document.body);
 // });

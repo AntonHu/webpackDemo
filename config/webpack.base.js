@@ -3,10 +3,11 @@
  * @作者: Anton
  * @Date: 2020-03-02 14:49:41
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-18 19:40:08
+ * @LastEditTime: 2020-06-18 20:51:02
  */
 const path = require('path');
 const webpack = require('webpack');
+const fs = require('fs');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -124,21 +125,28 @@ module.exports = {
         //     },
         //     hash: true // 加hash
         // }),
-        ...Object.keys(entries).map(
-            (entry) =>
-                new HtmlWebpackPlugin({
-                    cache: true, // 只有文件修改后才会重新打包文件
-                    filename: `${entry}.html`,
-                    template: path.join(__dirname, '../src/index.html'), // 以哪个文件作为模板，不指定的话用默认的空模板
-                    minify: {
-                        removeComments: true // 删除注释
-                    },
-                    chunks: [...Object.keys(utilChunks), entry],
-                    // chunks: [entry],
-                    hash: true // 加hash
-                })
-        ),
-        extractLESS,
+        ...Object.keys(entries).map((entry) => {
+            const getHtmlPath = (filePath) => {
+                const defaultPath = path.join(__dirname, `../src/index.html`);
+                try {
+                    const stat = fs.statSync(filePath);
+                    return stat.isFile() ? filePath : defaultPath;
+                } catch (e) {
+                    return defaultPath;
+                }
+            };
+            return new HtmlWebpackPlugin({
+                cache: true, // 只有文件修改后才会重新打包文件
+                filename: `${entry}.html`,
+                template: getHtmlPath(path.join(__dirname, `../src/pages/${entry}.html`)),
+                minify: {
+                    removeComments: true // 删除注释
+                },
+                chunks: [...Object.keys(utilChunks), entry],
+                // chunks: [entry],
+                hash: true // 加hash
+            });
+        }),
         extractSass,
         new ProgressBarPlugin({
             format: chalk.green('Progressing') + '[:bar]' + chalk.green(':percent') + '(:elapsed seconds)',
