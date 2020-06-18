@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="44px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>加盟</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M17,38 C28.3333333,32 34,25 34,17 C34,7 26.5,1.95399252e-13 17,1.95399252e-13 C7.5,1.95399252e-13 3.55271368e-14,7 3.55271368e-14,17 C3.55271368e-14,25 5.66666667,32 17,38 Z" id="path-1"></path>
+        <filter x="-14.7%" y="-10.5%" width="129.4%" height="126.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.15004917 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#FD9F27" offset="0%"></stop>
+            <stop stop-color="#FC602E" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-4" cx="17" cy="17" r="14"></circle>
+        <filter x="-7.1%" y="-3.6%" width="114.3%" height="114.3%" filterUnits="objectBoundingBox" id="filter-5">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.988235294   0 0 0 0 0.388235294   0 0 0 0 0.180392157  0 0 0 0.375737544 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="app" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页-未开业" transform="translate(-182.000000, -378.000000)">
+            <g id="icon/地图/定位图标/未选中/加盟" transform="translate(180.000000, 377.000000)">
+                <g>
+                    <rect id="矩形" fill="#437DFF" opacity="0" x="9.23705556e-14" y="4.54747351e-13" width="44" height="44"></rect>
+                    <g id="定位图标-copy-2" transform="translate(5.000000, 3.000000)">
+                        <g id="Oval-Copy">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        </g>
+                        <g id="Oval">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
+                            <use fill="url(#linearGradient-3)" fill-rule="evenodd" xlink:href="#path-4"></use>
+                        </g>
+                        <path d="M15.25,10 L15.2410608,22.3845634 L14.3639928,24 L12.3289647,24 L13.2459063,22.2384106 L13.2744113,19.0658035 L10.0784607,19.0658035 L10.4841654,12.3075954 L12.1936703,12.3075954 L11.8261401,17.5102153 L13.3131695,17.5102153 L13.3290181,11.5658735 L10.4846734,11.5658735 L10,10 L15.25,10 Z M12.625,20.2669053 L12.6220599,22.1333333 L10.5746772,22.1333333 L10,20.2666667 L12.625,20.2669053 Z M20.8771289,20.4150604 L23.7145036,20.4150604 L23.0933903,21.9110177 L20.829483,21.9110177 L20.8510494,24 L18.7291765,24 L18.7076102,21.9110177 L16.125,21.9110177 L16.125,20.4152976 L18.7567883,20.4150604 L18.76547,19.4299389 L16.1268606,19.4299389 L16.1356316,17.9339815 L19.1782006,17.9339815 L19.8950598,17.4666667 L20.7064602,17.9339815 L24,17.9339815 L23.3788867,19.4299389 L20.8795443,19.4299389 L20.8771289,20.4150604 Z M24,14.8389152 L24,16.5333333 L20.97662,16.5333333 L20.1410369,15.9754231 L19.340113,16.5333333 L16.125,16.5333333 L16.1485841,14.8394583 L18.0302969,14.8394583 L16.1691545,13.2666667 L16.1462896,11.5325262 L18.6674282,11.5325262 L18.6601531,12.7912909 L20.0757472,14.1735935 L21.6619721,12.7912909 L21.6691583,11.5325262 L16.1462896,11.5325262 L16.1716364,10 L23.9850796,10 L23.9825977,13.2666667 L22.2236754,14.8394583 L24,14.8389152 Z" id="logo" fill="#FFFFFF" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

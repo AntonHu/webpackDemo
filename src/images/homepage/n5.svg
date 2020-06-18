@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="39px" height="47px" viewBox="0 0 39 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 7</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#FFBF22" offset="0%"></stop>
+            <stop stop-color="#FDDD0F" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="app" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页-已开业" transform="translate(-69.000000, -393.000000)">
+            <g id="Group-7" transform="translate(69.000000, 393.000000)">
+                <g id="Group-4-Copy">
+                    <path d="M19.5,47 C19.5,47 39,37.7165461 39,19.9827303 C39,8.94777961 30.2714286,0 19.5,0 C8.72857143,0 0,8.94777961 0,19.9827303 C0,36.9551212 19.5,47 19.5,47 Z" id="map" fill="url(#linearGradient-1)"></path>
+                    <ellipse id="Oval-9" stroke="#5A381B" stroke-width="1.04" cx="19.5" cy="19.8444444" rx="13.3421053" ry="13.5777778"></ellipse>
+                </g>
+                <g id="Group-5" transform="translate(15.000000, 15.000000)" stroke="#5A381B" stroke-linecap="round" stroke-width="2">
+                    <path d="M9.89949494,0 L0,9.89949494" id="Line-8"></path>
+                    <polyline id="Line-8" points="9.89949494 9.89949494 4.94974747 4.94974747 0 0"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

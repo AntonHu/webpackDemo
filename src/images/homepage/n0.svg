@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="44px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.2 (81672) - https://sketch.com -->
+    <title>icon/地图/定位图标/选中备份 9@1x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M17,38 C28.3333333,32 34,25 34,17 C34,7 26.5,1.95399252e-13 17,1.95399252e-13 C7.5,1.95399252e-13 3.55271368e-14,7 3.55271368e-14,17 C3.55271368e-14,25 5.66666667,32 17,38 Z" id="path-1"></path>
+        <filter x="-14.7%" y="-10.5%" width="129.4%" height="126.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.15004917 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="9.37978394%" x2="50%" y2="90.7560483%" id="linearGradient-3">
+            <stop stop-color="#FFE33B" offset="0%"></stop>
+            <stop stop-color="#FFC800" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-4" cx="14" cy="14" r="14"></circle>
+        <filter x="-7.1%" y="-3.6%" width="114.3%" height="114.3%" filterUnits="objectBoundingBox" id="filter-6">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.912562274   0 0 0 0 0.814964573   0 0 0 0 0.234800465  0 0 0 0.428567526 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="确定" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页" transform="translate(-247.000000, -330.000000)">
+            <g id="日间模式-锁定" transform="translate(245.000000, 329.000000)">
+                <rect id="矩形" fill="#437DFF" opacity="0" x="9.23705556e-14" y="4.54747351e-13" width="44" height="44"></rect>
+                <g id="定位图标-copy-2" stroke-width="1" transform="translate(5.000000, 3.000000)">
+                    <g id="Oval-Copy">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                    <g id="Oval-Copy" transform="translate(3.000000, 3.000000)">
+                        <mask id="mask-5" fill="white">
+                            <use xlink:href="#path-4"></use>
+                        </mask>
+                        <g id="蒙版">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-6)" xlink:href="#path-4"></use>
+                            <use fill="url(#linearGradient-3)" fill-rule="evenodd" xlink:href="#path-4"></use>
+                        </g>
+                    </g>
+                    <path d="M22.0702153,14.9143101 L21.1513307,14.9143101 L21.1513307,13.0971745 C21.1583197,12.010502 20.7230628,10.9661774 19.9424462,10.1966626 C19.1618295,9.42714777 18.1006405,8.99630862 16.9950949,9.00002383 C15.8894503,8.99631104 14.8281513,9.42711635 14.0473622,10.1965994 C13.266573,10.9660825 12.8310722,12.010403 12.8377691,13.0971745 L12.8377691,14.9143101 L11.9188845,14.9143101 C11.4126366,14.9172356 11.0029763,15.3199081 11,15.8175208 L11,23.0967775 C11,23.5917756 11.4152966,23.9999941 11.9188845,23.9999941 L22.0702153,23.9999941 C22.5802246,24.0017745 22.9958031,23.5980736 23,23.0967775 L23,15.8175208 C22.9958031,15.3162248 22.5802246,14.9125238 22.0702153,14.9143101 Z M19.7626487,14.9143101 L14.2264511,14.9143101 L14.2264511,13.0971745 C14.2264511,11.592434 15.4642537,10.3709435 16.9950949,10.3650425 C18.5255102,10.3715318 19.7626487,11.5928503 19.7626487,13.0971745 L19.7626487,14.9143101 L19.7626487,14.9143101 Z" id="形状" fill="#784B23" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
