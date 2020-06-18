@@ -1,1 +1,1 @@
-console.log('page actInvitationImage')
+console.log('page actInvitationImage');

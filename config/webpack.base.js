@@ -3,9 +3,10 @@
  * @作者: Anton
  * @Date: 2020-03-02 14:49:41
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-17 18:08:53
+ * @LastEditTime: 2020-06-18 19:01:48
  */
 const path = require('path');
+const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -15,7 +16,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const chalk = require('chalk');
 // 以树图的方式展示打包后的文件
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const { getMultiEntries } = require('./config.utils');
+const { getMultiEntries, getMultiUtils } = require('./config.utils');
 
 const extractLESS = new ExtractTextPlugin({
     // disable: process.env.NODE_ENV == 'development' ? true : false, // 开发环境下直接内联，不抽离
@@ -29,9 +30,19 @@ const extractSass = new ExtractTextPlugin({
 });
 
 const entries = getMultiEntries(path.resolve('src/pages/*/*.+(jsx|js|tsx|ts)'));
+const utils = getMultiUtils(path.resolve('src/utils/*.+(jsx|js|tsx|ts)'));
+const utilChunks = {};
+Object.keys(utils).forEach(
+    (util) =>
+        (utilChunks[util] = {
+            chunks: 'initial',
+            name: util,
+            enforce: true
+        })
+);
 
 module.exports = {
-    entry: entries,
+    entry: { ...utils, ...entries },
     // {
     //     // 入口文件，传入对象，定义不同的chunk（如app, utils）
     //     app: path.join(__dirname, '../src/script/index'),
@@ -44,11 +55,14 @@ module.exports = {
             return `scripts/${name}.[hash].js`;
         },
         publicPath: '../../',
-        chunkFilename: 'script/[name].[contenthash].js'
+        chunkFilename: 'scripts/[name].[contenthash].js'
     },
     // 解析扩展，添加了这个东西。我们就可以直接 import { a } from 'index'; 了，而不用必须 import { a } from 'index.ts' 这样输入了，因为 webpack 会自动帮我们搜索查询并添加
     resolve: {
-        extensions: ['.tsx', '.ts', '.jsx', '.js']
+        extensions: ['.tsx', '.ts', '.jsx', '.js'],
+        alias: {
+            '@': path.resolve(__dirname, '../src')
+        }
     },
     module: {
         rules: [
@@ -72,7 +86,18 @@ module.exports = {
                 use: extractSass.extract({
                     // filename: '[name].[hash].css',
                     fallback: 'style-loader',
-                    use: ['css-loader', 'postcss-loader', 'sass-loader'],
+                    use: [
+                        'css-loader',
+                        'postcss-loader',
+                        'sass-loader',
+                        {
+                            // 全局样式
+                            loader: 'sass-resources-loader',
+                            options: {
+                                resources: [path.resolve(__dirname, '../src/styles/common.scss')]
+                            }
+                        }
+                    ],
                     publicPath: '../../' // 默认取output.publicPath
                 })
             },
@@ -108,36 +133,60 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            // filename: path.join(__dirname, 'entry.html'), // 生成的html(绝对路径：可用于生成到根目录)
-            filename: 'pages/index.html', // 生成的html文件名（相对路径：将生成到output.path指定的dist目录下）
-            template: path.join(__dirname, '../src/index.html'), // 以哪个文件作为模板，不指定的话用默认的空模板
-            minify: {
-                removeComments: true // 删除注释
-            },
-            hash: true // 加hash
-        }),
+        // new HtmlWebpackPlugin({
+        //     cache: true, // 只有文件修改后才会重新打包文件
+        //     // filename: path.join(__dirname, 'entry.html'), // 生成的html(绝对路径：可用于生成到根目录)
+        //     filename: 'pages/index.html', // 生成的html文件名（相对路径：将生成到output.path指定的dist目录下）
+        //     template: path.join(__dirname, '../src/index.html'), // 以哪个文件作为模板，不指定的话用默认的空模板
+        //     minify: {
+        //         removeComments: true // 删除注释
+        //     },
+        //     hash: true // 加hash
+        // }),
         ...Object.keys(entries).map(
             (entry) =>
                 new HtmlWebpackPlugin({
-                    template: path.join(__dirname, '../src/index.html'), // 以哪个文件作为模板，不指定的话用默认的空模板
+                    cache: true, // 只有文件修改后才会重新打包文件
                     filename: `pages/${entry}.html`,
-                    chunks: [entry]
+                    template: path.join(__dirname, '../src/index.html'), // 以哪个文件作为模板，不指定的话用默认的空模板
+                    minify: {
+                        removeComments: true // 删除注释
+                    },
+                    chunks: [...Object.keys(utilChunks), entry],
+                    // chunks: [entry],
+                    hash: true // 加hash
                 })
         ),
-        // new HtmlWebpackPlugin({
-        //     filename: 'app.html',
-        //     chunks: ['app']
-        // }),
-        // new HtmlWebpackPlugin({
-        //     filename: 'utils.html',
-        //     chunks: ['utils']
-        // }),
         extractLESS,
         extractSass,
         new ProgressBarPlugin({
             format: chalk.green('Progressing') + '[:bar]' + chalk.green(':percent') + '(:elapsed seconds)',
             clear: false
+        }),
+        new webpack.ProvidePlugin({
+            FastClick: path.resolve(__dirname, '../src/utils/fastclick.js'),
+            // React: 'react',
+            // ReactDOM: 'react-dom'
         })
     ]
+    // 提取公共模块，包括第三方库和自定义工具库等
+    // optimization: {
+    //     // 找到chunk中共享的模块,取出来生成单独的chunk
+    //     splitChunks: {
+    //         chunks: 'all', // async表示抽取异步模块，all表示对所有模块生效，initial表示对同步模块生效
+    //         cacheGroups: {
+    //             vendors: {
+    //                 // 抽离第三方插件
+    //                 test: /[\\/]node_modules[\\/]/, // 指定是node_modules下的第三方包
+    //                 name: 'vendors',
+    //                 priority: -10 // 抽取优先级
+    //             },
+    //             // ...utilChunks
+    //         }
+    //     },
+    //     // 为 webpack 运行时代码创建单独的chunk
+    //     // runtimeChunk: {
+    //     //     name: 'manifest'
+    //     // }
+    // }
 };
