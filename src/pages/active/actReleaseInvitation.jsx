@@ -3,7 +3,7 @@
  * @作者: Anton
  * @Date: 2020-06-02 11:42:41
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-18 19:01:12
+ * @LastEditTime: 2020-06-18 19:28:32
  */
 import '@/pages/active/actReleaseInvitation.scss';
 // $(function () {
@@ -112,7 +112,7 @@ var InviteShare = React.createClass({
             return;
         }
         if ( !APP_TOOLS.isPC() ) {
-            window.location.replace(window.location.origin + '/campaign/active/actInvitationImage.html?name=' + name);
+            window.location.replace('./actInvitationImage.html?name=' + name);
             return;
         }
         _this.showLoading();

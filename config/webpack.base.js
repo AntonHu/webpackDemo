@@ -3,7 +3,7 @@
  * @作者: Anton
  * @Date: 2020-03-02 14:49:41
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-18 19:01:48
+ * @LastEditTime: 2020-06-18 19:28:01
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -147,7 +147,7 @@ module.exports = {
             (entry) =>
                 new HtmlWebpackPlugin({
                     cache: true, // 只有文件修改后才会重新打包文件
-                    filename: `pages/${entry}.html`,
+                    filename: `${entry}.html`,
                     template: path.join(__dirname, '../src/index.html'), // 以哪个文件作为模板，不指定的话用默认的空模板
                     minify: {
                         removeComments: true // 删除注释
