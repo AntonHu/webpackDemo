@@ -12,14 +12,16 @@
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,scss}'",
     "prettierSingle": "prettier --write"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.{css,scss}": [
       "prettier --write"
     ],
-    "*.{js?(x)}": [
+    "*.js?(x)": [
       "eslint --fix",
       "prettier --write"
     ],
@@ -54,8 +56,8 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^3.2.0",
-    "less": "^3.11.1",
-    "less-loader": "^5.0.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.10",
     "node-sass": "^4.14.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-cssnext": "^3.1.0",
@@ -76,9 +78,7 @@
     "webpack-parallel-uglify-plugin": "^1.1.2"
   },
   "dependencies": {
-    "lint-staged": "^10.2.10",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "yorkie": "^2.0.0"
+    "react-dom": "^16.13.1"
   }
 }

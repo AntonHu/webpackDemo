@@ -27,9 +27,10 @@ const isPC = () => {
 if (isPC()) window.location.replace('./livevodPC.html');
 var Livevod = React.createClass({
     getInitialState: function () {
+        this.orderStatusTimer = null;
+
         this.API_GET_HISTORY = APP_CONFIG.APP_SERVICE + 'front/conference/getShowList'; // 获取历史推送消息
         this.API_GET_CURRENT = APP_CONFIG.APP_SERVICE + 'front/conference/getShow'; // 获取当前推送消息
-        this.orderStatusTimer = null;
         this.FindLastOrderByUserId_API = APP_CONFIG.APP_SERVICE + 'weixin/order/findLastOrderByUserId';
         this.FindCarStatus_API = APP_CONFIG.APP_SERVICE + 'weixin/washCar/findStatus2';
         this.FindStatusByOrderId_API = APP_CONFIG.APP_SERVICE + 'weixin/order/findStatusByOrderId'; //订单状态
@@ -413,7 +414,7 @@ var Livevod = React.createClass({
                     <iframe
                         className="main-livevod-box"
                         src={this.state.url}
-                        frameborder="0"
+                        frameBorder="0"
                         scrolling="no"
                         noresize
                     ></iframe>
