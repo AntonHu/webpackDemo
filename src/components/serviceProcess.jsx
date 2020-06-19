@@ -306,3 +306,4 @@ var StopWashPopup = React.createClass({
         );
     }
 });
+export default ServiceProcessMini;

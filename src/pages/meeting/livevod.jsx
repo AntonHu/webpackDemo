@@ -3,9 +3,10 @@
  * @作者: CZY
  * @Date: 2020-05-28 17:31:59
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-19 16:32:49
+ * @LastEditTime: 2020-06-19 20:06:23
  */
 import '@/styles/meeting/livevod.scss';
+import ServiceProcessMini from '@/components/serviceProcess';
 
 var QR_CODE_DOM_ID = 'qrcode-image';
 var VIDEO_TYPE = [1, 2, 3, 4, 5, 6, 7];
