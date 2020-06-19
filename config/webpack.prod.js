@@ -3,7 +3,7 @@
  * @作者: Anton
  * @Date: 2020-06-17 17:54:32
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-18 18:22:25
+ * @LastEditTime: 2020-06-19 13:49:27
  */
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -19,6 +19,7 @@ const prodConfig = {
      */
     mode: 'production',
     optimization: {
+        // 压缩css
         minimizer: [new OptimizeCSSAssetsPlugin({})]
     },
     plugins: [

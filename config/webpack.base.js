@@ -3,7 +3,7 @@
  * @作者: Anton
  * @Date: 2020-03-02 14:49:41
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-19 13:47:06
+ * @LastEditTime: 2020-06-19 13:55:34
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -41,6 +41,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, '../dist'),
         filename: (glob) => {
+            console.log(process.env.NODE_ENV);
             const { name } = glob.chunk;
             return `scripts/${name}.[contenthash].js`;
         },
