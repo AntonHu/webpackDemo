@@ -9,8 +9,8 @@ import '@/styles/active/actReleaseInvitation.scss';
 // $(function () {
 //     FastClick.attach(document.body);
 // });
-var PAGE_ID = "page-html";
-var IMAGE_ID = "page-image";
+var PAGE_ID = 'page-html';
+var IMAGE_ID = 'page-image';
 
 // if ( window.location.origin.indexOf('wechat') === -1 ) {
 //     window.location.replace(APP_CONFIG.WECHAT2_APP_URL + window.location.pathname.slice(1) + window.location.search);
@@ -29,7 +29,8 @@ var InviteShare = React.createClass({
         this.shareWX();
         this.shareDD();
     },
-    DPR: function () { // 获取设备dpi
+    DPR: function () {
+        // 获取设备dpi
         if (window.devicePixelRatio && window.devicePixelRatio > 1) {
             return window.devicePixelRatio;
         }
@@ -46,7 +47,7 @@ var InviteShare = React.createClass({
             var canvas = document.createElement('canvas');
             canvas.width = width * scale;
             canvas.height = height * scale;
-            var content = canvas.getContext("2d");
+            var content = canvas.getContext('2d');
             content.mozImageSmoothingEnabled = false;
             content.webkitImageSmoothingEnabled = false;
             content.msImageSmoothingEnabled = false;
@@ -64,19 +65,19 @@ var InviteShare = React.createClass({
                 proxy: null,
                 useCORS: true
             }).then(function (canvas) {
-                resolve(canvas.toDataURL("image/png"));
-            })
-        })
+                resolve(canvas.toDataURL('image/png'));
+            });
+        });
     },
     downloadFile(fileName, content) {
         let aLink = document.createElement('a');
         let blob = this.base64ToBlob(content); //new Blob([content]);
 
-        let evt = document.createEvent("HTMLEvents");
-        evt.initEvent("click", true, true);//initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为
+        let evt = document.createEvent('HTMLEvents');
+        evt.initEvent('click', true, true); //initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为
         aLink.download = fileName;
         aLink.href = URL.createObjectURL(blob);
-        aLink.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));//兼容火狐
+        aLink.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window })); //兼容火狐
     },
     base64ToBlob(code) {
         let parts = code.split(';base64,');
@@ -94,12 +95,12 @@ var InviteShare = React.createClass({
     showLoading: function () {
         this.setState({
             showLoading: true
-        })
+        });
     },
     hideLoading: function () {
         this.setState({
             showLoading: false
-        })
+        });
     },
     nameChange: function (e) {
         this.setState({ name: e.target.value });
@@ -107,11 +108,11 @@ var InviteShare = React.createClass({
     downloadImage: function () {
         var _this = this;
         const { name } = _this.state;
-        if ( !name ) {
-            $.alert("请先输入邀请人姓名！");
+        if (!name) {
+            $.alert('请先输入邀请人姓名！');
             return;
         }
-        if ( !APP_TOOLS.isPC() ) {
+        if (!APP_TOOLS.isPC()) {
             window.location.replace('./actInvitationImage.html?name=' + name);
             return;
         }
@@ -123,32 +124,34 @@ var InviteShare = React.createClass({
         });
     },
     //设置微信分享
-    shareWX: function(){
-        const title = "邀请函生成器",
+    shareWX: function () {
+        const title = '邀请函生成器',
             url = window.location.href,
             desc = '输入被邀人姓名即可生成图片',
-            icon = APP_CONFIG.STATIC_URL + "wechat/images/active/actReleaseInvitationShareIcon.png";
-        APP_TOOLS.isEnvClient(function(env){
-            if (env.client === 'wx') {
-                TD_TOOLS.initShareConfig({ title, url, icon, desc });
-            }
-        }.bind(this));
+            icon = APP_CONFIG.STATIC_URL + 'wechat/images/active/actReleaseInvitationShareIcon.png';
+        APP_TOOLS.isEnvClient(
+            function (env) {
+                if (env.client === 'wx') {
+                    TD_TOOLS.initShareConfig({ title, url, icon, desc });
+                }
+            }.bind(this)
+        );
     },
-    shareDD: function() {
+    shareDD: function () {
         if (dd.env.platform === 'notInDingTalk') return;
-        const title = "邀请函生成器",
+        const title = '邀请函生成器',
             url = window.location.href,
             desc = '输入被邀人姓名即可生成图片',
-            icon = APP_CONFIG.STATIC_URL + "wechat/images/active/actReleaseInvitationShareIcon.png";
+            icon = APP_CONFIG.STATIC_URL + 'wechat/images/active/actReleaseInvitationShareIcon.png';
         dd.biz.navigation.setRight({
-            show: true,//控制按钮显示， true 显示， false 隐藏， 默认true
-            control: true,//是否控制点击事件，true 控制，false 不控制， 默认false
-            text: '更多',//控制显示文本，空字符串表示显示默认文本
-            onSuccess : function(result) {
+            show: true, //控制按钮显示， true 显示， false 隐藏， 默认true
+            control: true, //是否控制点击事件，true 控制，false 不控制， 默认false
+            text: '更多', //控制显示文本，空字符串表示显示默认文本
+            onSuccess: function (result) {
                 //如果control为true，则onSuccess将在发生按钮点击事件被回调
                 DD_TOOLS.share(url, title, desc, icon);
             },
-            onFail : function(err) {}
+            onFail: function (err) {}
         });
     },
 
@@ -156,7 +159,7 @@ var InviteShare = React.createClass({
         const { name, imageUrl, imageWidth, imageHeight } = this.state;
         const getSize = () => {
             const styleObject = {
-                opacity: imageUrl ? 1 : 0, 
+                opacity: imageUrl ? 1 : 0,
                 zIndex: imageUrl ? 10 : 8
             };
             if (imageWidth) {
@@ -166,72 +169,92 @@ var InviteShare = React.createClass({
             return styleObject;
         };
         const countVH = (px) => {
-            if ((window.innerHeight / window.innerWidth) < (697 / 418)) {
-                return px / 697 * 100 + 'vh';
+            if (window.innerHeight / window.innerWidth < 697 / 418) {
+                return (px / 697) * 100 + 'vh';
             } else {
-                return px / 418 * 100 + 'vw';
+                return (px / 418) * 100 + 'vw';
             }
-        }
+        };
         return (
             <div id="page-actReleaseInvitation">
                 <div id="release-container" className="release-container">
-                    <img 
-                        id="font-image" 
-                        className="font-image" 
-                        src={imageUrl} 
+                    <img
+                        id="font-image"
+                        className="font-image"
+                        src={imageUrl}
                         style={{
-                            opacity: imageUrl ? 1 : 0, 
+                            opacity: imageUrl ? 1 : 0,
                             zIndex: imageUrl ? 10 : 8,
                             width: countVH(418),
                             height: countVH(697)
                         }}
                     />
-                    <div className="loadingContent" style={{ display: this.state.showLoading ? "block" : "none" }} onClick={this.stopPropagation}>
+                    <div
+                        className="loadingContent"
+                        style={{ display: this.state.showLoading ? 'block' : 'none' }}
+                        onClick={this.stopPropagation}
+                    >
                         <div className="content">
                             <img src="https://source.1kmxc.com/static-web-new/wechat/images/active/invite/loading.gif" />
                         </div>
                     </div>
-                    <div 
-                        id={PAGE_ID} 
+                    <div
+                        id={PAGE_ID}
                         className="page-html"
                         style={{
                             width: countVH(418),
                             height: countVH(697)
                         }}
                     >
-                        <img className="html-bg" src={APP_CONFIG.STATIC_URL + 'wechat/images/active/actReleaseInvitation.jpg'} />
+                        <img
+                            className="html-bg"
+                            src={APP_CONFIG.STATIC_URL + 'wechat/images/active/actReleaseInvitation.jpg'}
+                        />
                         <div className="operation">
-                            <input className="name-input" placeholder="请输入" onChange={this.nameChange} 
+                            <input
+                                className="name-input"
+                                placeholder="请输入"
+                                onChange={this.nameChange}
                                 value={name}
                                 style={{
                                     marginTop: countVH(240),
                                     fontSize: countVH(20)
                                 }}
                             />
-                            <div className="btn-group"
+                            <div
+                                className="btn-group"
                                 style={{
                                     marginTop: countVH(200)
-                                }}>
+                                }}
+                            >
                                 <button className="down-btn" onClick={this.downloadImage}>
                                     {APP_TOOLS.isPC() ? '下载图片' : '生成图片'}
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div id={IMAGE_ID} className="page-image"
+                    <div
+                        id={IMAGE_ID}
+                        className="page-image"
                         style={{
                             width: countVH(418),
                             height: countVH(697)
                         }}
                     >
-                        <img className="html-bg" src={APP_CONFIG.STATIC_URL + 'wechat/images/active/actReleaseInvitation.jpg'} />
+                        <img
+                            className="html-bg"
+                            src={APP_CONFIG.STATIC_URL + 'wechat/images/active/actReleaseInvitation.jpg'}
+                        />
                         <div className="operation">
-                            <div className="name-text"
+                            <div
+                                className="name-text"
                                 style={{
                                     marginTop: countVH(240),
                                     fontSize: countVH(20)
                                 }}
-                            >{name}</div>
+                            >
+                                {name}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -239,9 +262,6 @@ var InviteShare = React.createClass({
             </div>
         );
     }
-})
+});
 
-ReactDOM.render(
-    <InviteShare />,
-    document.getElementById('app')
-)
+ReactDOM.render(<InviteShare />, document.getElementById('app'));

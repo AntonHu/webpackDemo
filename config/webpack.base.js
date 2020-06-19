@@ -3,7 +3,7 @@
  * @作者: Anton
  * @Date: 2020-03-02 14:49:41
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-19 13:55:34
+ * @LastEditTime: 2020-06-19 16:34:55
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -25,6 +25,7 @@ const extractSass = new ExtractTextPlugin({
 });
 
 const entries = getMultiEntries(path.resolve('src/pages/*/*.+(jsx|js|tsx|ts)'));
+// 通用js
 const utils = getMultiUtils(path.resolve('src/utils/*.+(jsx|js|tsx|ts)'));
 const utilChunks = {};
 Object.keys(utils).forEach(
@@ -41,7 +42,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, '../dist'),
         filename: (glob) => {
-            console.log(process.env.NODE_ENV);
+            // console.log(process.env.NODE_ENV);
             const { name } = glob.chunk;
             return `scripts/${name}.[contenthash].js`;
         },
@@ -84,7 +85,7 @@ module.exports = {
                             // 全局样式
                             loader: 'sass-resources-loader',
                             options: {
-                                resources: [path.resolve(__dirname, '../src/styles/common.scss')],
+                                resources: [path.resolve(__dirname, '../src/styles/common.scss')]
                             }
                         }
                     ],
@@ -133,7 +134,7 @@ module.exports = {
                     ...Object.keys(utilChunks).map((utilItem) => `manifest-${utilItem}`),
                     'vendor',
                     'common'
-                ],
+                ]
                 // hash: true // script标签的src路径会加hash作为请求参数，这个会影响缓存
             });
         }),
@@ -143,7 +144,7 @@ module.exports = {
             clear: false
         }),
         new webpack.ProvidePlugin({
-            FastClick: path.resolve(__dirname, '../src/utils/fastclick.js'),
+            FastClick: path.resolve(__dirname, '../src/utils/fastclick.js')
             // React: 'react',
             // ReactDOM: 'react-dom'
         })

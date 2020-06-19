@@ -1,16 +1,15 @@
 $color: #333;
 $bg-color: #00a0e6;
-$border:1px solid #00a0e6;
-$link-color-hover:  darken($bg-color, 10%);
+$border: 1px solid #00a0e6;
+$link-color-hover: darken($bg-color, 10%);
 .btn {
-  display: inline-block;
-  padding: 6px 12px;
-  outline: none;
-  border: $border;
-  color: $color;
-  background: $bg-color;
-
+    display: inline-block;
+    padding: 6px 12px;
+    outline: none;
+    border: $border;
+    color: $color;
+    background: $bg-color;
 }
 .btn:hover {
-  color:$link-color-hover;
+    color: $link-color-hover;
 }

@@ -3,7 +3,7 @@
  * @作者: Anton
  * @Date: 2020-04-24 21:07:08
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-17 17:34:14
+ * @LastEditTime: 2020-06-19 17:01:31
  */
 module.exports = {
     env: {
@@ -37,6 +37,7 @@ module.exports = {
         useJSXTextNode: true
     },
     rules: {
+        'react/react-in-jsx-scope': 'off', // 关闭 jsx必须引入React
         'react/prop-types': 'off', // 关闭 prop-types 校验
         'react/no-string-refs': 'off', // 允许使用 ref
         'react/no-find-dom-node': 'off', // 允许使用 findDOMNode

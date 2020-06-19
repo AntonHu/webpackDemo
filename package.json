@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server  --config config/webpack.dev.js --open",
     "dev": "webpack --config config/webpack.dev.js",
     "prod": "webpack --config config/webpack.prod.js",
-    "start": "webpack-dev-server  --config config/webpack.dev.js --open",
     "watch": "webpack --config config/webpack.dev.js --watch",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,scss}'",
     "prettierSingle": "prettier --write"
@@ -52,8 +52,10 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "file-loader": "^5.1.0",
+    "file-loader": "^6.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "less": "^3.11.1",
+    "less-loader": "^5.0.0",
     "node-sass": "^4.14.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-cssnext": "^3.1.0",
@@ -66,11 +68,12 @@
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.5",
     "url-loader": "^3.0.0",
-    "webpack": "^4.43.0",
+    "webpack": "^4.41.6",
     "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "webpack-parallel-uglify-plugin": "^1.1.2"
   },
   "dependencies": {
     "lint-staged": "^10.2.10",

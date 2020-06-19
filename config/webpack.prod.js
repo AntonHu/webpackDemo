@@ -3,11 +3,12 @@
  * @作者: Anton
  * @Date: 2020-06-17 17:54:32
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-19 13:49:27
+ * @LastEditTime: 2020-06-19 17:17:20
  */
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const prodConfig = {
@@ -21,6 +22,10 @@ const prodConfig = {
     optimization: {
         // 压缩css
         minimizer: [new OptimizeCSSAssetsPlugin({})]
+    },
+    performance: {
+        // 关闭大文件警告
+        hints: false
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -37,6 +42,28 @@ const prodConfig = {
                 ZJZSY_URL: 'http://hos.zjzsyxs.com/portal.html?pageName=washCarDeatail&data=', //浙江中石油订单页链接
                 ISPROD: true //是否是正式环境
             })
+        }),
+        // 使用 ParallelUglifyPlugin 并行压缩输出的 JS 代码
+        new ParallelUglifyPlugin({
+            // 传递给 UglifyJS 的参数
+            uglifyJS: {
+                output: {
+                    // 最紧凑的输出
+                    beautify: false,
+                    // 删除所有的注释
+                    comments: false
+                },
+                compress: {
+                    // 在UglifyJs删除没有用到的代码时不输出警告
+                    // warnings: false,
+                    // 删除所有的 `console` 语句，可以兼容ie浏览器
+                    drop_console: true,
+                    // 内嵌定义了但是只用到一次的变量
+                    collapse_vars: true,
+                    // 提取出出现多次但是没有定义成变量去引用的静态值
+                    reduce_vars: true
+                }
+            }
         })
     ]
 };

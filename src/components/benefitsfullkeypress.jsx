@@ -1,8 +1,8 @@
-$(function() {
+$(function () {
     FastClick.attach(document.body);
 });
 var FullKeyPressNoTemp = React.createClass({
-    getInitialState: function (){
+    getInitialState: function () {
         this.num = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
         this.str = [
             ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'P'],
@@ -10,98 +10,106 @@ var FullKeyPressNoTemp = React.createClass({
             ['Z', 'X', 'C', 'V', 'B', 'N', 'M', 'L']
         ];
 
-        return {
-        }
+        return {};
     },
-    show: function (){
+    show: function () {
         this.setState({
             dis: 'block'
         });
     },
-    hide: function (){
+    hide: function () {
         this.setState({ dis: 'none' });
     },
-    wordClickHandle: function (e){
+    wordClickHandle: function (e) {
         var val = e.target.innerText,
             entry = this.props.entry;
 
         // 车牌为临时，点击word取消临时状态
-        if(this.props.entry === '-----') return this.props.setNoEntry(val);
+        if (this.props.entry === '-----') return this.props.setNoEntry(val);
 
-        if(!entry.length){
+        if (!entry.length) {
             entry = val;
-        }else if(entry.length >= 1 && entry.length < 6){
+        } else if (entry.length >= 1 && entry.length < 6) {
             entry += val;
-        }else if(entry.length == 6){
-            entry = entry.substring(0, entry.length-1);
+        } else if (entry.length == 6) {
+            entry = entry.substring(0, entry.length - 1);
             entry += val;
         }
 
         this.props.setNoEntry(entry);
     },
-    wordDeleteHandle: function (){
+    wordDeleteHandle: function () {
         var entry = this.props.entry;
 
-        if(!entry.length) return;
-        entry = entry.substring(0, entry.length-1);
+        if (!entry.length) return;
+        entry = entry.substring(0, entry.length - 1);
         this.props.setNoEntry(entry);
     },
-    confirm: function (){
+    confirm: function () {
         this.props.confirmCarInfo();
     },
-    interimClickHandle: function (){
-        if(this.props.entry === '-----'){
+    interimClickHandle: function () {
+        if (this.props.entry === '-----') {
             this.props.setNoEntry('');
-        }else {
+        } else {
             this.props.setNoEntry('-----');
         }
     },
-    stopPropagation: function (e){
+    stopPropagation: function (e) {
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();
     },
-    render: function (){
+    render: function () {
         var kpNumNode = [],
             kpStrNode = [];
 
-        for(var i=0;i<this.str.length;i++){
+        for (var i = 0; i < this.str.length; i++) {
             var ddNode = [];
-            for(var j=0;j<this.str[i].length;j++){
-                ddNode.push(
-                    <dd onTouchEnd={ this.wordClickHandle.bind(this) }>{ this.str[i][j] }</dd>
-                )
+            for (var j = 0; j < this.str[i].length; j++) {
+                ddNode.push(<dd onTouchEnd={this.wordClickHandle.bind(this)}>{this.str[i][j]}</dd>);
             }
-            kpStrNode.push(
-                <dl>{ ddNode }</dl>
-            )
+            kpStrNode.push(<dl>{ddNode}</dl>);
         }
 
-        for(var i=0;i<this.num.length;i++){
-            kpNumNode.push(
-                <dd onTouchEnd={ this.wordClickHandle.bind(this) }>{ this.num[i] }</dd>
-            )
+        for (var i = 0; i < this.num.length; i++) {
+            kpNumNode.push(<dd onTouchEnd={this.wordClickHandle.bind(this)}>{this.num[i]}</dd>);
         }
 
-        return(
-            <div id="fullkeypressID" className="press-box" onClick={ this.stopPropagation } style={{ 'display': this.props.fullKeyPressDis, position:'initial' }}>
-                <div style={{display:this.props.topHidden?"none":"",background:"#efefef",width:"100%",height:"20px",borderTop:"1px solid #ddd"}}></div>
+        return (
+            <div
+                id="fullkeypressID"
+                className="press-box"
+                onClick={this.stopPropagation}
+                style={{ display: this.props.fullKeyPressDis, position: 'initial' }}
+            >
+                <div
+                    style={{
+                        display: this.props.topHidden ? 'none' : '',
+                        background: '#efefef',
+                        width: '100%',
+                        height: '20px',
+                        borderTop: '1px solid #ddd'
+                    }}
+                ></div>
                 <div className="k-entry">
-                    <dl>{ kpNumNode }</dl>
+                    <dl>{kpNumNode}</dl>
                     <div className="clearfix">
-                        <div className="kp-str fl">{ kpStrNode }</div>
+                        <div className="kp-str fl">{kpStrNode}</div>
                         <div className="kp-action fr">
-                            <div className="del" onTouchEnd={ this.wordDeleteHandle }></div>
-                            <div className="confirm" onClick={ this.confirm }>确定</div>
+                            <div className="del" onTouchEnd={this.wordDeleteHandle}></div>
+                            <div className="confirm" onClick={this.confirm}>
+                                确定
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 });
 
 var KeyPressNoTemp = React.createClass({
-    getInitialState: function (){
+    getInitialState: function () {
         this.words = [
             ['京', '沪', '浙', '苏', '粤', '鲁', '晋', '冀'],
             ['豫', '川', '渝', '吉', '辽', '黑', '皖', '鄂'],
@@ -116,19 +124,19 @@ var KeyPressNoTemp = React.createClass({
 
         return {
             f: this.words,
-            entry: '',
-        }
+            entry: ''
+        };
     },
-    wordClickHandle: function (e){
+    wordClickHandle: function (e) {
         var val = e.target.innerText,
             entry = this.state.entry;
 
         var f = this.strings;
-        if(!entry.length){
+        if (!entry.length) {
             entry = val;
 
             this.props.setWordEntry(entry);
-        }else if(entry.length == 1){
+        } else if (entry.length == 1) {
             entry += val;
 
             this.props.setWordEntry(entry);
@@ -141,49 +149,58 @@ var KeyPressNoTemp = React.createClass({
             entry: entry
         });
     },
-    wordDeleteHandle: function (){
+    wordDeleteHandle: function () {
         var entry = this.state.entry;
 
-        if(!entry.length) return;
-        if(entry.length <= 1){
+        if (!entry.length) return;
+        if (entry.length <= 1) {
             this.setState({
                 f: this.words
             });
         }
-        entry = entry.substring(0, entry.length-1);
+        entry = entry.substring(0, entry.length - 1);
 
         this.setState({
             entry: entry
         });
     },
-    stopPropagation: function (e){
+    stopPropagation: function (e) {
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();
     },
-    render: function (){
+    render: function () {
         var rowsNode = [];
-        for(var i=0;i<this.state.f.length;i++){
+        for (var i = 0; i < this.state.f.length; i++) {
             var ddNode = [];
-            for(var j=0;j<this.state.f[i].length;j++){
-                ddNode.push(
-                    <dd>{ this.state.f[i][j] }</dd>
-                )
+            for (var j = 0; j < this.state.f[i].length; j++) {
+                ddNode.push(<dd>{this.state.f[i][j]}</dd>);
             }
-            rowsNode.push(
-                <dl>{ ddNode }</dl>
-            )
+            rowsNode.push(<dl>{ddNode}</dl>);
         }
-        return(
-            <div id="keypressID" className="press-box" onClick={ this.stopPropagation } style={{ 'display': this.props.keyPressDis, position:'initial' }}>
-                <div style={{display:this.props.topHidden?"none":"",background:"#efefef",width:"100%",height:"20px",borderTop:"1px solid #ddd"}}></div>
-                <div className="k-result" style={{ 'display': this.state.entry ? 'block' : 'none' }}>
-                    <p>{ this.state.entry }</p>
-                    <div className="del" onClick={ this.wordDeleteHandle.bind(this) }></div>
+        return (
+            <div
+                id="keypressID"
+                className="press-box"
+                onClick={this.stopPropagation}
+                style={{ display: this.props.keyPressDis, position: 'initial' }}
+            >
+                <div
+                    style={{
+                        display: this.props.topHidden ? 'none' : '',
+                        background: '#efefef',
+                        width: '100%',
+                        height: '20px',
+                        borderTop: '1px solid #ddd'
+                    }}
+                ></div>
+                <div className="k-result" style={{ display: this.state.entry ? 'block' : 'none' }}>
+                    <p>{this.state.entry}</p>
+                    <div className="del" onClick={this.wordDeleteHandle.bind(this)}></div>
                 </div>
-                <div className="k-entry" onClick={ this.wordClickHandle.bind(this) }>
-                    { rowsNode }
+                <div className="k-entry" onClick={this.wordClickHandle.bind(this)}>
+                    {rowsNode}
                 </div>
             </div>
-        )
+        );
     }
 });
