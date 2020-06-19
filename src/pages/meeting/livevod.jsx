@@ -3,7 +3,7 @@
  * @作者: CZY
  * @Date: 2020-05-28 17:31:59
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-18 19:49:04
+ * @LastEditTime: 2020-06-19 11:33:03
  */
 import '@/styles/meeting/livevod.scss';
 
@@ -12,6 +12,7 @@ var VIDEO_TYPE = [1, 2, 3, 4, 5, 6, 7];
 /**
  * 判断当前是不是PC设备
  */
+console.log('121')
 const isPC = () => {
     const userAgentInfo = navigator.userAgent;
     const Agents = ['Android', 'iPhone', 'SymbianOS', 'Windows Phone', 'iPad', 'iPod'];

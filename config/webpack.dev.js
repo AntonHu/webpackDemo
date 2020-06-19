@@ -3,11 +3,12 @@
  * @作者: Anton
  * @Date: 2020-06-17 17:54:24
  * @LastEditors: Anton
- * @LastEditTime: 2020-06-18 18:20:35
+ * @LastEditTime: 2020-06-19 13:35:43
  */
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const devConfig = {
     /**
@@ -45,7 +46,7 @@ const devConfig = {
                 BPPC_URL: 'https://ppst02.bppc.com.cn', //中油BP的域名
                 ZJZSY_URL: 'http://hos.dev.zjzsyxs.com/portal.html?pageName=washCarDeatail&data=' //浙江中石油订单页链接
             })
-        })
+        }),
         // new BundleAnalyzerPlugin()
     ]
 };
